@@ -1,0 +1,10 @@
+spring:
+  data:
+    cassandra:
+      contact-points: localhost
+      keyspace-name: container_bookings
+      port: 9042
+
+wiremock:
+  server:
+    port: 8081
