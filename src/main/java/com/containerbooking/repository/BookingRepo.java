@@ -16,7 +16,7 @@ public class BookingRepo {
    private final BookingRepository bookingRepository;
     public Mono<BookingRef> persistBookings(Bookings bookings){
         return bookingRepository.save(bookings)
-                .map(savedBooking -> new BookingRef(savedBooking.getId()))
+                .map(savedBooking -> BookingRef.builder().bookingRef(savedBooking.getId()).build())
                 .onErrorResume(throwable -> {
                     System.out.println("Error saving booking: " + throwable.getMessage());
                     return Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Sorry there was a problem processing your request"));

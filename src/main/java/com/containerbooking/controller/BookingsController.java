@@ -14,18 +14,18 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/bookings")
 public class BookingsController {
    private final BookingService bookingService;
-
     @PostMapping
-    public Mono<Map<String, Boolean>> checkAvailability(@Valid @RequestBody BookingContainer bookingRequest) {
+    public Mono<BookingRef> checkAvailability(@Valid @RequestBody BookingContainer bookingRequest) {
         return bookingService.checkAvailability(bookingRequest);
     }
-    @PostMapping
+    @PostMapping("/book")
     public Mono<BookingRef> containerBooking(@Valid @RequestBody ContainerBooking bookingRequest){
         return bookingService.saveBooking(bookingRequest);
     }
